@@ -31,4 +31,29 @@ public class StudentController {
         List<Student> studentList = studentService.getAllStudents();
         return studentList;
     }
+
+    @GetMapping("/count")
+    public String countStudents(){
+        String response = studentService.countStudents();
+        return response;
+    }
+
+    @PutMapping("/updatePut/{id}")
+    public String updateStudentUsingPut(@PathVariable int id, @RequestBody Student newStudentRequest){
+        String response = studentService.updateStudentUsingPut(id,newStudentRequest);
+        return response;
+    }
+
+    // @RequestParam - only requesting that particular parameter(takes in the form of request parameter query)
+    @PatchMapping("/updatePatch/{id}")
+    public String updateStudentEmailUsingPatch(@PathVariable int id,@RequestParam String newEmail){
+        String response = studentService.updateStudentEmailUsingPatch(id,newEmail);
+        return response;
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteStudentById(@PathVariable int id){
+        String response = studentService.deleteStudentById(id);
+        return response;
+    }
 }

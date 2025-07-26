@@ -32,4 +32,48 @@ public class StudentService {
         List<Student> studentList = studentRepository.findAll();
         return studentList;
     }
+
+    public String countStudents(){
+       long totalCount = studentRepository.count();
+       return "Total students present are : "+totalCount;
+    }
+
+    public String updateStudentUsingPut(int id, Student newStudentRequest){
+        // find student with id
+        // if student is present, update it
+        // else we cannot update
+
+        Student exisitingStudent = getStudentById(id);
+        if(exisitingStudent!=null){
+            // proceed to update
+            studentRepository.save(newStudentRequest);
+            return "Student updated successfully!";
+        }else{
+            // cannot update
+            return "Student not found, hence cannot update!";
+        }
+    }
+
+
+    public String updateStudentEmailUsingPatch(int id, String newEmail){
+        // find student with id
+        // if student is present, update it
+        // else we cannot update
+
+        Student exisitingStudent = getStudentById(id);
+        if(exisitingStudent!=null){
+            // proceed to update
+            exisitingStudent.setEmail(newEmail);
+            studentRepository.save(exisitingStudent);
+            return "Student updated successfully!";
+        }else{
+            // cannot update
+            return "Student not found, hence cannot update!";
+        }
+    }
+
+    public String deleteStudentById(int id){
+        studentRepository.deleteById(id);
+        return "Student with id : "+id+" got deleted successfully!";
+    }
 }
